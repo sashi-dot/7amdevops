@@ -1,5 +1,6 @@
 #!/bin/bash
 for i in {1..10}
 do
-echo "HEllo Github from local"
+
+	echo "HEllo Github from remote"
 done
