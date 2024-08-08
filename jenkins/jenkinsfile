@@ -12,11 +12,12 @@ pipeline{
                           sh 'echo "build is successful on test stage"'
                         }
                 }
+
                 stage('deploy'){
                         steps{
                           sh '''
-                          bash ${WORKSPACE}/linux/script.sh
-                          echo "build is successful on deploy stage"'
+                          bash | ${WORKSPACE}/linux/script.sh
+                          echo "build is successful on deploy stage"
                           '''
                         }
                 }  
