@@ -16,10 +16,12 @@ pipeline{
                 stage('deploy'){
                         steps{
                           sh '''
-                          bash | ${WORKSPACE}/linux/script.sh
+                          bash  ${WORKSPACE}/linux/script.sh
                           echo "build is successful on deploy stage"
                           '''
                         }
-                }  
+                } 
+
         }
+
 }
