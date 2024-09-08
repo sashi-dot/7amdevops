@@ -4,24 +4,38 @@ pipeline{
         stages{
                 stage('build'){
                         steps{
-                          sh 'echo "build is successful on build stage"'
+                          sh '''
+                          echo "Building Docker image on `hostname`"
+                          docker image build -t app_image:1.0 ${WORKSPACE}/docker/dockerfile
+
+                          '''
                         }
                 }
                 stage('test'){
                         steps{
-                          sh 'echo "build is successful on test stage"'
+                          sh '''
+                          echo "build is successful on test stage"
+                          docker image ls | grep app_image
+                          '''
                         }
                 }
 
                 stage('deploy'){
                         steps{
                           sh '''
-                          bash  ${WORKSPACE}/linux/script.sh
+                          docker container run -d --name c1 -p 9000:80 app_image:1.0 
+                         
                           echo "build is successful on deploy stage"
                           '''
                         }
                 } 
 
+                stage('verify'){
+                        steps{
+                          sh '''
+                          docker container ls | grep c1
+                          '''
+                        }
         }
 
 }
